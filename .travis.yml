@@ -1,0 +1,8 @@
+language: csharp
+solution: "./FluentVerification/FluentVerification.sln"
+install:
+- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./FluentVerification/FluentVerification.sln
+- nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+script:
+- xbuild ./FluentVerification/FluentVerification.sln
+- mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./FluentVerification.Tests/bin/Debug/FluentVerification.Tests.dll
