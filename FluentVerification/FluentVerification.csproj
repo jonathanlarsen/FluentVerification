@@ -44,7 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assertion.cs" />
+    <Compile Include="AssertionExtenders.cs" />
     <Compile Include="Check.cs" />
+    <Compile Include="ChildAssertion.cs" />
+    <Compile Include="IAssertion.cs" />
+    <Compile Include="IPartialAssertion.cs" />
+    <Compile Include="MultiAssertion.cs" />
+    <Compile Include="MultiAssertionExtenders.cs" />
+    <Compile Include="PartialAssertion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
