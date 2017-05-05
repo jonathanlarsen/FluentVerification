@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>FluentVerification</id>
+    <version>$version$</version>
+    <title>Fluent Verification</title>
+    <authors>Lucas Obendorf</authors>
+    <owners>Lucas Obendorf</owners>
+    <licenseUrl>https://github.com/LucasObendorf/FluentVerification/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/LucasObendorf/FluentVerification</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A fluent assertion tool</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright &#x00A9; Lucas Obendorf.  All rights reserved.</copyright>
+    <tags></tags>
+  </metadata>
+  <files>
+	<file src="FluentVerification\bin\$configuration$\FluentVerification.dll" target="lib\net40\" />
+  </files>
+</package>
