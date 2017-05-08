@@ -39,5 +39,10 @@ namespace FluentVerification
         {
             return assertion.Within(times, times, handler);
         }
+
+        public static MultiAssertion<T> AtLeast<T>(this MultiAssertion<T> assertion, uint times, Action<IAssertion<T>> handler)
+        {
+            return assertion.Within(times, null, handler);
+        }
     }
 }

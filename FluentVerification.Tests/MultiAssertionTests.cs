@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace FluentVerification.Tests
@@ -90,7 +91,38 @@ namespace FluentVerification.Tests
                     .With(x => x.Exactly(0,
                         once => once.EqualTo(1)));
             });
+        }
 
+        [TestCase(1, 1, true)
+        ,TestCase(0, 1, false)
+        ,TestCase(2, 1, true)]
+        public void AtLeast_Handles_Expected_Range(int items, int atLeast, bool shouldSucceed)
+        {
+            var list = new List<string>();
+
+            for (var i = 0; i < items; i++)
+            {
+                list.Add(Guid.NewGuid().ToString());
+            }
+
+            if (shouldSucceed)
+            {
+                Assert.DoesNotThrow(() =>
+                {
+                    Check.That(list)
+                         .With(x => x.AtLeast((uint)atLeast,
+                            item => item.NotNull()));
+                });
+            }
+            else
+            {
+                Assert.Throws<AssertionException>(() =>
+                {
+                    Check.That(list)
+                         .With(x => x.AtLeast((uint)atLeast,
+                            item => item.NotNull()));
+                });
+            }
         }
     }
 }
