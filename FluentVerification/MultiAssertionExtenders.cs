@@ -5,21 +5,19 @@ namespace FluentVerification
 {
     public static class MultiAssertionExtenders
     {
-        public static MultiAssertion<T> Exactly<T>(this MultiAssertion<T> assertion, uint times, Action<IAssertion<T>> handler)
+        private static MultiAssertion<T> Within<T>(this MultiAssertion<T> assertion, uint? min, uint? max, Action<IAssertion<T>> handler)
         {
-            var partialAssertion = new PartialAssertion<T>();
-
-            handler(partialAssertion);
-
             assertion.Handle(items =>
             {
                 var matches = 0;
 
                 foreach (var item in items)
                 {
+                    var itemAssertion = new Assertion<T>(item);
+
                     try
                     {
-                        partialAssertion.Complete(item);
+                        handler(itemAssertion);
 
                         matches++;
                     }
@@ -28,13 +26,18 @@ namespace FluentVerification
                         // ignored
                     }
 
-                    if(matches > times) throw new AssertionException($"Item matched too many times. Expected {times} times.");
+                    if (max != null && matches > max) throw new AssertionException($"Item matched too many times. Expected {max} times.");
                 }
 
-                if(matches < times) throw new AssertionException($"Item matched too few times. Expected {times} times.");
+                if (min != null && matches < min) throw new AssertionException($"Item matched too few times. Expected {min} times.");
             });
 
             return assertion;
+        }
+
+        public static MultiAssertion<T> Exactly<T>(this MultiAssertion<T> assertion, uint times, Action<IAssertion<T>> handler)
+        {
+            return assertion.Within(times, times, handler);
         }
     }
 }

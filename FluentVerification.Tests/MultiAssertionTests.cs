@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace FluentVerification.Tests
 {
-    [TestFixture]
+    [TestFixture, Parallelizable]
     public class MultiAssertionTests
     {
         [Test]
